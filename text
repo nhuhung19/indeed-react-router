@@ -1,0 +1,1 @@
+json-server --watch candidates.json -p 3000
