@@ -9,7 +9,7 @@ export default function Login(props) {
     let userLogin = (e) => {
         e.preventDefault()
         props.setIsLogin(true)
-        history.push("/")
+        history.push("/candidates")
     }
     return (
         <form onSubmit={(e) => userLogin(e)} className="container mt-5 w-50">
