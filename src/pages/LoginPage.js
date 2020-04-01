@@ -7,9 +7,8 @@ export default function Login(props) {
     let history = useHistory()
     console.log(props)
     let userLogin = (e) => {
-        // debugger
         e.preventDefault()
-        props.logIn()
+        props.setIsLogin(true)
         history.push("/")
     }
     return (

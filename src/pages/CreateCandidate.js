@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { InputGroup, Row, Col, Form, Button, Container } from "react-bootstrap";
+import {useHistory } from 'react-router-dom'
 
 export default function CreateCandidate() {
+    let history = useHistory()
 
     let [candidate, setCandidate] = useState({
         city: "",
@@ -30,6 +32,7 @@ export default function CreateCandidate() {
             console.log("Oops")
         }
         alert('Create candidate successs')
+        history.push("/candidates")
     }
 
     return (

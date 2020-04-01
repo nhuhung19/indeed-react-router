@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { InputGroup, Row, Col, Form, Button, Container } from "react-bootstrap";
 
 export default function CandidateForm(props) {
+    console.log(props)
     console.log(props.candidate)
     const [validated, setValidated] = useState(false);
     const [candidate, setCandidate] = useState({

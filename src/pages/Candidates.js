@@ -2,7 +2,7 @@ import React, { useEffect , useState } from 'react'
 import { Row, Col, Card, ListGroup, Container, ListGroupItem } from "react-bootstrap";
 import { faMap, faEdit, faTrash, faUserMd, faMapPin, faEnvelope, faVenusMars, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import {Link } from 'react-router-dom'
 export default function Candidates() {
     const [candidates, setCandidates] = useState([]);
 
@@ -65,12 +65,12 @@ export default function Candidates() {
                                         </ListGroupItem>
                                     </ListGroup>
                                     <Card.Body>
-                                        <Card.Link onClick={() => onDeleteCandidate(candidate.id)}>
+                                        <Link className="mx-2" onClick={() => onDeleteCandidate(candidate.id)}>
                                             <FontAwesomeIcon icon={faTrash} /> Remove
-                                        </Card.Link>
-                                        <Card.Link href={`/candidates/${candidate.id}`}>
+                                        </Link>
+                                        <Link className="mx-2" to={`/candidates/${candidate.id}`}>
                                             <FontAwesomeIcon icon={faEdit} /> Edit
-                                        </Card.Link>
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </Col>
