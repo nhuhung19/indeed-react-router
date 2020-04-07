@@ -3,8 +3,10 @@ import { Row, Col, Card, ListGroup, Container, ListGroupItem } from "react-boots
 import { faMap, faEdit, faTrash, faUserMd, faMapPin, faEnvelope, faVenusMars, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 export default function Candidates() {
     const [candidates, setCandidates] = useState([]);
+    let user = useSelector(state => state.user)
 
     useEffect(() => {
         fetchCandidates()
@@ -30,6 +32,7 @@ export default function Candidates() {
       }
 
     return (
+        
         <div>
             <Container fluid>
                 <Row>
@@ -64,6 +67,8 @@ export default function Candidates() {
                                             <FontAwesomeIcon icon={faEnvelope} /> {candidate.email}
                                         </ListGroupItem>
                                     </ListGroup>
+                                    
+                                    { user.email === candidate.email || user.email === 'admin@gmail.com' ? 
                                     <Card.Body>
                                         <Link className="mx-2" onClick={() => onDeleteCandidate(candidate.id)}>
                                             <FontAwesomeIcon icon={faTrash} /> Remove
@@ -72,6 +77,7 @@ export default function Candidates() {
                                             <FontAwesomeIcon icon={faEdit} /> Edit
                                         </Link>
                                     </Card.Body>
+                                       : '' }
                                 </Card>
                             </Col>
                         )
@@ -79,5 +85,6 @@ export default function Candidates() {
                 </Row>
             </Container>
         </div>
+        
     )
 }

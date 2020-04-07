@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import {useHistory } from 'react-router-dom'
 
 import { InputGroup, Row, Col, Form, Button, Container } from "react-bootstrap";
 
 export default function CandidateForm(props) {
+    let history = useHistory()
     console.log(props)
     console.log(props.candidate)
     const [validated, setValidated] = useState(false);
@@ -62,6 +64,7 @@ export default function CandidateForm(props) {
             e.stopPropagation();
         } else {
             updateCandidate();
+            history.push('/candidates')
         }
         setValidated(true);
     };

@@ -1,8 +1,17 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import {Navbar, Nav, Form, Button, FormControl} from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
 
 export default function NavBar() {
+    const dispatch = useDispatch()
+    let history = useHistory()
+    let user = useSelector(state => state.user)
+    let onLogout = () => {
+        dispatch({type: 'LOGOUT'})
+        history.push('/login')
+    }
     return (
         <div>
             <Navbar bg="light" variant="light">
@@ -14,8 +23,7 @@ export default function NavBar() {
                     <Link className="mx-2" to="/login">Login</Link>
                 </Nav>
                 <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-primary">Search</Button>
+                   {user.email ? <Button onClick={onLogout} variant="outline-primary">Log out</Button> : ''} 
                 </Form>
             </Navbar>
         </div>

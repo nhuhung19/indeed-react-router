@@ -1,7 +1,7 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import HomePage from './pages/HomePage'
 import Candidates from './pages/Candidates'
 import CandidatePage from './pages/CandidatePage'
@@ -10,11 +10,13 @@ import LoginPage from './pages/LoginPage'
 import NavBar from './components/NavBar'
 import CreateCandidate from './pages/CreateCandidate'
 import { useState } from 'react';
+import {useSelector} from 'react-redux'
 
 function App() {
-    let [isLogin, setIsLogin] = useState(false)
+    let user = useSelector(state => state.user)
+    // let [isLogin, setIsLogin] = useState(false)
     let ProtectedRoute = (props)=> {
-        if(props.isAuthenticated){
+        if(user.authenticate){
             return (
                 <Route {...props} />
             )
@@ -24,17 +26,17 @@ function App() {
             )
         }
     }
+    console.log(user)
 
-  return (
+  return (  
     <div>
         <NavBar />
-
-
+            <h1 className="text-center">{user.email ? `Well come ${user.email}`: ''}</h1>
         <Switch>
-            <ProtectedRoute path="/candidates/:id" isAuthenticated={isLogin} render={(props) => <CandidatePage  {...props} />} />
-            <ProtectedRoute path="/createcandidate" isAuthenticated={isLogin} render={(props) => <CreateCandidate {...props}/>} />
-            <Route path="/candidates" render={(props) => <Candidates {...props}/>} />
-            <Route path="/login"  render={(props) => <LoginPage setIsLogin={setIsLogin} {...props}/>} />
+            <ProtectedRoute path="/candidates/:id" render={(props) => <CandidatePage  {...props} />} />
+            <ProtectedRoute path="/createcandidate"  render={(props) => <CreateCandidate {...props}/>} />
+            <ProtectedRoute path="/candidates" render={(props) => <Candidates {...props}/>} />
+            <Route path="/login"  render={(props) => <LoginPage {...props}/>} />
             <Route path="/" render={() => <HomePage />} />
             <Route path="*" render={() => <FourOhFourPage />} />
         </Switch>
